@@ -5,6 +5,12 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+export const config = {
+  api: {
+    bodyParser: false, // REQUIRED for large file uploads
+  },
+};
+
 // Configuration
 cloudinary.config({ 
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME, 
