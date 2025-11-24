@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") //This is not a error its due to working on older version.
 }
 
 model Video{
@@ -20,7 +20,7 @@ model Video{
   publicId    String    @unique
   title       String
   description String?
-  originaSize String
+  originalSize String
   compressedSize String
-  duration String
+  duration Float
 }
