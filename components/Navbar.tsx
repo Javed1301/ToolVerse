@@ -33,7 +33,7 @@ export default function Navbar() {
             About
           </Link>
           {/* 2. FIXED TYPO: Changed contact-us to contact */}
-          <Link href="/contact" className="hover:text-primary transition-colors">
+          <Link href="/contact-us" className="hover:text-primary transition-colors">
             Contact Us
           </Link>
         </div>
