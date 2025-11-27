@@ -5,27 +5,29 @@ const isPublicRoute = createRouteMatcher([
     "/sign-in",
     "/sign-up",
     "/",
-    "/home"
+    "/about",
+    "/contact-us",
 ])
 
 const isPublicApiRoute = createRouteMatcher([
-    "/api/videos"
+    "/api/videos",
+    "/api/contact"
 
 ])
 export default clerkMiddleware(async(auth,req) =>{
     const {userId} = await auth();
     
     const currentURL = new URL(req.url);
-    const isHomePage = currentURL.pathname === "/home"
+    const isHomePage = currentURL.pathname === "/"
     const isApiRequest = currentURL.pathname.startsWith("/api")
 
-    if(currentURL.pathname === "/"){
-        return NextResponse.redirect(new URL("/home",req.url));
-    }
+    // if(currentURL.pathname === "/"){
+    //     return NextResponse.redirect(new URL("/home",req.url));
+    // }
 
 
-    if(userId && isPublicRoute(req) && !isHomePage){
-        return NextResponse.redirect(new URL("/home",req.url));
+    if (userId && (currentURL.pathname === "/sign-in" || currentURL.pathname === "/sign-up")) {
+        return NextResponse.redirect(new URL("/home", req.url));
     }
 
     if(!userId){

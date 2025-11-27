@@ -1,18 +1,31 @@
 "use client";
 
-import React from "react";
+import { Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Image as ImageIcon, Video, LogOut, Settings } from "lucide-react";
+import { 
+  Home, 
+  Image as ImageIcon, 
+  Video, 
+  LogOut,  
+  LayoutDashboard, // New: For Gallery
+  Info,            // New: For About
+  Mail             // New: For Contact Us
+} from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
 import ThemeToggle from "./ThemeToggle";
+// import { usePathname } from "next/navigation"; // Don't forget this import
+
 const Sidebar = () => {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: "Gallery", href: "/home", icon: Home },
+    { name: "Home", href: "/", icon: Home }, // Public Landing Page
+    { name: "Gallery", href: "/home", icon: LayoutDashboard }, // The User's Main Dashboard
     { name: "Social Share", href: "/social-share", icon: ImageIcon },
     { name: "Video Upload", href: "/video-upload", icon: Video },
+    { name: "About", href: "/about", icon: Info },
+    { name: "Contact Us", href: "/contact-us", icon: Mail }, // Note: Ensure this href matches your folder name (app/contact)
   ];
 
   return (
@@ -22,10 +35,18 @@ const Sidebar = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <aside className="bg-base-200 text-base-content w-64 min-h-screen flex flex-col border-r border-base-300">
           {/* Logo Area */}
-          <div className="p-6 flex items-center justify-center bg-base-300">
-            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-              ToolVerse
-            </h1>
+          <div className="p-6 flex items-center justify-center border-b border-base-300">
+            <Link href="/home" className="flex items-center gap-2 group">
+              {/* Icon Box */}
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              
+              {/* Text */}
+              <span className="font-bold text-4xl tracking-tight text-base-content group-hover:text-primary transition-colors">
+                ToolVerse
+              </span>
+            </Link>
           </div>
 
           {/* Menu Items */}

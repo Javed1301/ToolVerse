@@ -1,11 +1,21 @@
 import { NextRequest,NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { auth } from "@clerk/nextjs/server";
 
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
+    const { userId } = await auth(); 
+
+    if (!userId) {
+        throw new Error("You must be logged in");
+    }
+    // console.log("Fetching videos for user:", userId);
     try {
         const videos = await prisma.video.findMany({
+            where:{
+                userId:userId
+            },
             orderBy:{
                 createdAt:"desc"    
             }
