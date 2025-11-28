@@ -190,14 +190,14 @@ export default function LandingPage() {
         <ServiceCard
           title="Smart Video Compression"
           description="Reduce file size by up to 90% without losing visible quality. Perfect for WhatsApp, Email, and Discord sharing."
-          href="/video-compression"
+          href="/video-upload"
           previewComponent={CompressionPreview}
         />
 
         <ServiceCard
           title="Social Media Resizer"
           description="Automatically crop and resize your images for Instagram, Twitter, LinkedIn and more. Supports all aspect ratios."
-          href="/social-resizer"
+          href="/social-share"
           previewComponent={ResizerPreview}
         />
 

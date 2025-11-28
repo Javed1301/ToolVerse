@@ -7,28 +7,39 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-base-100">
-      {/* Sidebar (Fixed on desktop, hidden on mobile) */}
-      <div className="hidden lg:block w-64 flex-shrink-0">
-         <Sidebar />
-      </div>
+    // 1. MAIN WRAPPER: "lg:drawer-open" keeps it open on desktop
+    <div className="drawer lg:drawer-open">
       
-      {/* Main Content Area */}
-      <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
-        {/* Mobile Header to toggle Sidebar */}
-        <div className="lg:hidden mb-6">
-           <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost drawer-button">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-           </label>
-        </div>
+      {/* 2. THE HIDDEN CHECKBOX (Crucial for Mobile) */}
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      
+      {/* 3. PAGE CONTENT */}
+      <div className="drawer-content flex flex-col bg-base-100 min-h-screen">
         
-        {children}
-      </main>
+        {/* Mobile Header (Only visible on small screens) */}
+        <div className="lg:hidden p-4 pb-0">
+            <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost drawer-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </label>
+        </div>
 
-      {/* Mobile Drawer (Optional: you can hook this up to the same Sidebar component if you want a drawer effect) */}
-       <div className="drawer-side lg:hidden z-50">
-        <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-        <Sidebar />
+        {/* Main Children */}
+        <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
+            {children}
+        </main>
+      </div> 
+
+      {/* 4. THE SIDEBAR (Drawer Side) */}
+      <div className="drawer-side z-50">
+        {/* Overlay to close sidebar when clicking outside on mobile */}
+        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label> 
+        
+        {/* Sidebar Container */}
+        <aside className="w-64 h-full bg-base-200 text-base-content">
+            <Sidebar />
+        </aside>
       </div>
     </div>
   );
